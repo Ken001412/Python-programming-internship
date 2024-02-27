@@ -1,0 +1,48 @@
+import os
+import random
+
+def clear_screen():
+    """Clears the console output."""
+    if os.name == 'nt': 
+        _ = os.system('cls')
+    else:  
+        _ = os.system('clear')
+
+def main():
+    """The main function that runs the game."""
+    player_score = 0
+    computer_score = 0
+
+    while True:
+        clear_screen()
+        user_action = input("Enter a choice (rock, paper, scissors) or 'quit' to exit: ")
+
+        if user_action.lower() == 'quit':
+            break
+
+        if user_action not in ['rock', 'paper', 'scissors']:
+            print('Invalid choice. Please try again.')
+            continue
+
+        computer_action = random.choice(['rock', 'paper', 'scissors'])
+        print(f"Computer chose {computer_action}.")
+
+        if user_action == computer_action:
+            print("It's a tie!")
+        elif (user_action == "rock" and computer_action == "scissors") or \
+             (user_action == "paper" and computer_action == "rock") or \
+             (user_action == "scissors" and computer_action == "paper"):
+            print("You win!")
+            print("\U0001F389") 
+            player_score += 1
+        else:
+            print("Computer wins!")
+            print("\U0001F61E")  
+            computer_score += 1
+
+        print(f"Player score: {player_score}")
+        print(f"Computer score: {computer_score}")
+        input("Press Enter to continue...")
+
+if __name__ == "__main__":
+    main()
