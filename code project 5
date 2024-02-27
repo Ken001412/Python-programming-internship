@@ -1,0 +1,86 @@
+def decimal_to_binary(decimal_number):
+    binary_number = ""
+    while decimal_number > 0:
+        binary_number = str(decimal_number % 2) + binary_number
+        decimal_number = decimal_number // 2
+    return binary_number
+
+def binary_to_decimal(binary_number):
+    decimal_number = 0
+    for digit in binary_number:
+        decimal_number = decimal_number * 2 + int(digit)
+    return decimal_number
+
+def decimal_to_octal(decimal_number):
+    octal_number = ""
+    while decimal_number > 0:
+        octal_number = str(decimal_number % 8) + octal_number
+        decimal_number = decimal_number // 8
+    return octal_number
+
+def octal_to_decimal(octal_number):
+    decimal_number = 0
+    for digit in octal_number:
+        decimal_number = decimal_number * 8 + int(digit)
+    return decimal_number
+
+def hexadecimal_to_binary(hexadecimal_number):
+    binary_number = ""
+    for digit in hexadecimal_number:
+        if digit.isdigit():
+            binary_number += bin(int(digit))[2:].zfill(4)
+        elif digit.lower() in "abcdef":
+            binary_number += bin(ord(digit.lower()) - ord('a') + 10)[2:].zfill(4)
+        else:
+            raise ValueError("Invalid hexadecimal number")
+    return binary_number
+
+def binary_to_hexadecimal(binary_number):
+    hexadecimal_number = ""
+    for i in range(0, len(binary_number), 4):
+        binary_digit = binary_number[i:i+4]
+        decimal_digit = int(binary_digit, 2)
+        if decimal_digit < 10:
+            hexadecimal_number += str(decimal_digit)
+        elif decimal_digit < 16:
+            hexadecimal_number += chr(ord('a') + decimal_digit - 10)
+        else:
+            raise ValueError("Invalid binary number")
+    return hexadecimal_number
+
+def main():
+    while True:
+        print("\n\t\tNumber System Conversion")
+        print("\t\t1.Decimal to Binary")
+        print("\t\t2.Binary to Decimal")
+        print("\t\t3.Decimal to Octal")
+        print("\t\t4.Octal to Decimal")
+        print("\t\t5.Hexadecimal to Binary")
+        print("\t\t6.Binary to Hexadecimal")
+        print("\t\t7.Exit")
+        choice = int(input("\t\tEnter your choice: "))
+        if choice == 1:
+            decimal_number = int(input("\tEnter decimal number: "))
+            print("\tBinary number:", decimal_to_binary(decimal_number))
+        elif choice == 2:
+            binary_number = input("\tEnter binary number: ")
+            print("\tDecimal number:", binary_to_decimal(binary_number))
+        elif choice == 3:
+            decimal_number = int(input("\tEnter decimal number: "))
+            print("\tOctal number:", decimal_to_octal(decimal_number))
+        elif choice == 4:
+            octal_number = input("\tEnter octal number: ")
+            print("\tDecimal number:", octal_to_decimal(octal_number))
+        elif choice == 5:
+            hexadecimal_number = input("\tEnter hexadecimal number: ")
+            print("\tBinary number:", hexadecimal_to_binary(hexadecimal_number))
+        elif choice == 6:
+            binary_number = input("\tEnter binary number: ")
+            print("\tHexadecimal number:", binary_to_hexadecimal(binary_number))
+        elif choice == 7:
+            break
+        else:
+            print("\t\tInvalid choice")
+
+if __name__ == "__main__":
+    main()
